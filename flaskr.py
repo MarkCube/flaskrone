@@ -33,3 +33,4 @@ def teardown_request(exception):
     g.db.close()
 
 
+init_db()
