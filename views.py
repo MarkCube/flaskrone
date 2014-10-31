@@ -1,7 +1,7 @@
 from __future__ import with_statement
 from flask import request, session, g, redirect, url_for, \
     abort, render_template, flash
-
+from flaskr import app
 #Views
 @app.route('/')
 def show_entries():
@@ -38,3 +38,6 @@ def logout():
     session.pop('logged_in',None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
+
+if __name__ == '__main__':
+    app.run()

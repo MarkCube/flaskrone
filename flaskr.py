@@ -3,6 +3,7 @@ from contextlib import closing
 import sqlite3
 from flask import Flask, g
 
+
 #configuration
 DATABASE = '/tmp/flaskr.db'
 DEBUG = True
@@ -31,5 +32,4 @@ def before_request():
 def teardown_request(exception):
     g.db.close()
 
-if __name__ == '__main__':
-    app.run()
+
