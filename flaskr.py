@@ -11,9 +11,20 @@ SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
+
 #create the tiny application
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+from views import *
+
+app.add_url_rule('/', view_func=FlaskrView.as_view('index'))
+
+app.add_url_rule('/add', view_func=AddEntry.as_view('add'))
+
+app.add_url_rule('/login', view_func=Login.as_view('login'))
+
+app.add_url_rule('/logout', view_func=Logout.as_view('logout'))
 
 def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
@@ -34,3 +45,6 @@ def teardown_request(exception):
 
 
 init_db()
+
+if __name__ == '__main__':
+    app.run()
