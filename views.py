@@ -13,7 +13,8 @@ class FlaskrView(View):
 
 
 class AddEntry(View):
-    def add_entry(self):
+
+    def dispatch_request(self):
         if not session.get('logged_in'):
             abort(401)
         g.db.execute('insert into entries (title,text) values (?,?)', [request.form['title'],request.form['text']])
@@ -31,7 +32,7 @@ class Login(View):
                 error = 'Invalid Username'
             elif request.form['password'] != app.config['PASSWORD']:
                 error = 'Invalid password'
-                else:
+            else:
                 session['logged_in'] = True
             flash('You were logged in')
             return redirect(url_for('show_entries'))
